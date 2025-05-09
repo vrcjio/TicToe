@@ -10,6 +10,7 @@ function Circle({ draw, shape, ...props }) {
       r="40"
       stroke="#ff0088"
       custom={1}
+      fill="transparent"
       style={shape}
       {...props}
     ></motion.circle>

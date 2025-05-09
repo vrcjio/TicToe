@@ -6,12 +6,15 @@ import Line from "./Line";
 import { useGlobalContext } from "./Hooks/GlobalContext";
 
 const image = {
-  maxWidth: "10vw",
-  backgroundColor:"#000",
+  width:"100%",
+  maxWidth: "120px",
+  aspectRatio:"1 / 1",
+  margin:"5px",
+  backgroundColor:"#EEEEEE"
 };
 
 const shape = {
-  strokeWidth: 2,
+  strokeWidth: 5,
   strokeLinecap: "squre",
   fill: "transparent",
   cursor: "pointer",

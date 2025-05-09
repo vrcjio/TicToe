@@ -6,6 +6,7 @@ function ContextPlayer({ children }) {
   const initialBoard = Array.from({ length: 3 }, () => Array(3).fill(0));
   const [values, setValues] = useState(initialBoard);
   const [Turn, setTurn] = useState("x");
+  const [winner, setWinner] = useState(null);
 
   const changeTurn = () => {
     // if(Turn==="x") setTurn("o")
@@ -68,8 +69,10 @@ function ContextPlayer({ children }) {
         (first === "x" || first === "o") &&
         first === values[b1][b2] &&
         first === values[c1][c2]
-      )
+      ) {
+        console.log(a1, a2, " ", b1, b2, " ", c1, c2);
         return first;
+      }
     }
 
     return null;
@@ -144,11 +147,30 @@ function ContextPlayer({ children }) {
   };
 
   useEffect(() => {
-    const winner = winingLogic();
-    if (winner != null) {
-      alert("winner is: " + winner);
-      console.log("winner is: ", winner);
-      setValues(initialBoard);
+    const win = winingLogic();
+    console.log("win is: ", win);
+    let draw = true;
+
+    // Draw check - is any cell still 0?
+    for (let row of values) {
+      for (let val of row) {
+        if (val === 0) {
+          draw = false;
+          break;
+        }
+      }
+    }
+
+    if (win) {
+      setWinner(win);
+      setTimeout(() => {
+        setValues(initialBoard);
+      }, 3000); // delay to show win
+    } else if (draw) {
+      setWinner("draw");
+      setTimeout(() => {
+        setValues(initialBoard);
+      }, 3000); // delay to show draw
     }
   }, [Turn]);
 
@@ -159,6 +181,7 @@ function ContextPlayer({ children }) {
         Turn,
         handleSetValue,
         changeTurn,
+        winner,
       }}
     >
       {children}

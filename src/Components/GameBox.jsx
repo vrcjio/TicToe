@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Squre from "./Squre";
 import { useGlobalContext } from "./Hooks/GlobalContext";
+import WinningModal from "./WinningModal";
 
 function GameBox() {
   const { data } = useGlobalContext();
 
   return (
     <>
+      <WinningModal />
       <h1>
         Turn of:{" "}
         {data?.Turn && data?.Turn === "x" ? (
